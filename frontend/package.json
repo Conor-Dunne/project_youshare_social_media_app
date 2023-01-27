@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev:only": "vite dev --host",
     "build": "vite build",
-    "preview": "vite preview --port 9001",
+    "preview": "vite preview",
     "host": "vite"
   },
   "dependencies": {
