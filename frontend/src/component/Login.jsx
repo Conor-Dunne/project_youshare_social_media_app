@@ -3,12 +3,33 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import jwt_decode from "jwt-decode";
 import shareVideo from "../assets/share.mp4";
 import logo from "../assets/logowhite.png";
 
+import { client } from "../client";
+
 const Login = () => {
+  const navigate = useNavigate();
   const responseGoogle = (response) => {
-    console.log(response);
+    let userObj = jwt_decode(response.credential);
+    console.log(userObj);
+    localStorage.setItem('user', JSON.stringify(userObj));
+    const { name, sub , picture } = userObj;
+    console.log(name, sub, picture);
+
+    const doc= {
+      _id: sub,
+      _type: 'user',
+      userName: name,
+      image: picture,
+    }
+
+    client.createIfNotExists(doc)
+    .then(() => {
+      navigate('/', {replace: true})
+    })
+
   };
 
   return (
