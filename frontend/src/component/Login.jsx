@@ -51,7 +51,7 @@ const Login = () => {
         </div>
         <div className="shadow-2xl">
           <GoogleOAuthProvider
-            clientId= "336050469797-ahmvs4jbiqeqv8lkgkioqibc2pddlanm.apps.googleusercontent.com"
+            clientId= {import.meta.env.VITE_GOOGLE_API_TOKEN}
           >
             <GoogleLogin
               render={(renderProps) => (
